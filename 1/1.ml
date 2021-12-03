@@ -28,7 +28,7 @@ let rec count_increases2 = function
   | [] -> 0
   | x ->
       let set1 = take 3 x in let set2 = take 3 (List.tl x) in
-      count_increases (List.tl x) + if sum set1 < sum set2 then 1 else 0
+      count_increases2 (List.tl x) + if sum set1 < sum set2 then 1 else 0
 
 let () =
   let input = read_lines "1.txt" in
