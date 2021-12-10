@@ -1,0 +1,25 @@
+let parse_input () =
+  let handle = open_in "10.txt" in
+  let read_line () = try Some (input_line handle) with End_of_file -> None in
+  let rec read_loop acc = match read_line () with
+    | Some l -> read_loop (l :: acc)
+    | None   -> acc in
+  read_loop []
+
+let part1 =
+  let closing_braces = [')'; '>'; '}'; ']'] in
+  let rec check_braces sk s =
+    if s = "" then 0
+    else
+      let () = Printf.printf "%s\n" s in
+      let rest = (String.sub s 1 (-1 + String.length s)) in
+      if List.mem s.[0] closing_braces then
+        match List.hd sk, s.[0] with
+          | '<', '>' | '{', '}' | '(', ')' | '[', ']' ->
+            check_braces (List.tl sk) rest
+          | '<', _ -> 25137 | '{', _ -> 1197 | '[', _ -> 57 | '(', _ -> 3
+          | a, b -> Printf.printf "%c, %c\n" a b; 0
+      else check_braces (s.[0] :: sk) rest in
+  List.fold_left (fun a l -> a + check_braces [] l) 0
+
+let () = parse_input () |> part1 |> Printf.printf "%d\n"
