@@ -7,7 +7,7 @@ input = (fs.readFileSync "3.txt").toString().split "\n"
 findMostCommonBit = (inp, index, { o2 = no, co2 = no }) ->
   oneCount = inp.reduce ((a, v) -> a + +(v[index] is "1")), 0
   if o2 then +(inp.length / 2 <= oneCount)
-  else +(inp.length / 2 > oneCount) 
+  else +(inp.length / 2 > oneCount)
   
 part1 = ->
   gamma = 0; epsilon = 0
