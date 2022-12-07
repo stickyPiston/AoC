@@ -15,3 +15,4 @@ smaller_than = (n) -> (x) -> x < n
 Array::cons = (x) -> @push x; x
 Array::max = -> @foldl @[0], (ac, n) -> Math.max ac, n
 Array::min = -> @foldl @[0], (ac, n) -> Math.min ac, n
+print = console.log

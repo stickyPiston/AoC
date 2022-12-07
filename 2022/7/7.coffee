@@ -5,9 +5,5 @@ determine_size = -> sizes.cons do (while command = do commands.shift
     else (Number (command.split " ")[0]) or 0).sum
 do determine_size
 
-# Part 1
-console.log "Part 1:", do (sizes.filter (smaller_than 100000), sizes).sum
-
-# Part 2
-needed = 30000000 - (70000000 - do sizes.max)
-console.log "Part 2:", do (sizes.filter (greater_equal_than needed), sizes).min
+print "Part 1:", do (sizes.filter (smaller_than 1e5), sizes).sum
+print "Part 2:", do (sizes.filter (greater_equal_than do sizes.max - 4e7), sizes).min
