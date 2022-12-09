@@ -20,7 +20,6 @@ Array::max = -> @foldl @[0], (ac, n) -> Math.max ac, n
 Array::min = -> @foldl @[0], (ac, n) -> Math.min ac, n
 print = (xs...) -> console.log ...xs ; xs[0]
 id = (x) -> x
-always = (a) -> (b) -> a
 Array::count_if = (pred) -> (@filter pred).length
 matrix = ({ rows, cols }) -> (new Array rows).fill(0).map -> new Array cols
 Array::fold_until = (base, pred, fn) -> (@foldl [base, no], (ac, c, i, l) ->
@@ -32,3 +31,7 @@ Array::transpose = ->
         for col, col_index in row
             r[col_index][row_index] = col
     r
+abs = Math.abs
+Number::clamp = (min, max) -> Math.min(Math.max(@, min), max)
+list_of = (n, fn) -> (new Array n).fill(0).map (_, i) -> fn i
+Array::zip = (other) -> @map (el, i) -> [el, other[i]]

@@ -6,8 +6,7 @@ rows = (row, col) ->
 
 visible = (row) -> (height, col) ->
     return yes if col is 0 or col is width - 1
-    visible_in_line = (line) -> line.every smaller_than height
-    (rows row, col).some visible_in_line
+    (rows row, col).some (line) -> line.every smaller_than height
 print "Part 1:", width * 2 + do (for line, index in grid when 0 < index < height - 1
     line.count_if (visible index, width)).sum
 
