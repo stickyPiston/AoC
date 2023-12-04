@@ -1,6 +1,9 @@
 fs = require "fs"
-Array::sum = -> @reduce ((ac, n) -> ac + n), 0
+Array::sum = (fn) ->
+    if fn then @reduce ((ac, n) -> ac + fn n), 0
+    else @reduce ((ac, n) -> ac + n), 0
 Array::product = -> @reduce ((ac, n) -> ac * n) 1
+Array::iter = Array::forEach
 descending = (a, b) -> b - a
 ascending = (a, b) -> a - b
 newline = "\n"
@@ -35,3 +38,4 @@ abs = Math.abs
 Number::clamp = (min, max) -> Math.min(Math.max(@, min), max)
 list_of = (n, fn) -> (new Array n).fill(0).map (_, i) -> fn i
 Array::zip = (other) -> @map (el, i) -> [el, other[i]]
+Array::intersect = (other) -> @filter (el) -> other.includes el
