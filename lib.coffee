@@ -1,6 +1,6 @@
 fs = require "fs"
 Array::sum = (fn) ->
-    if fn then @reduce ((ac, n) -> ac + fn n), 0
+    if fn then @reduce ((ac, n) -> ac + ((fn n) or 0)), 0
     else @reduce ((ac, n) -> ac + n), 0
 Array::product = -> @reduce ((ac, n) -> ac * n) 1
 Array::iter = Array::forEach
@@ -8,7 +8,7 @@ descending = (a, b) -> b - a
 ascending = (a, b) -> a - b
 newline = "\n"
 chars = ""
-read_text = (path) -> do (fs.readFileSync path).toString
+read_text = (path) -> do (do (fs.readFileSync path).toString).trim
 Array::foldl = (b, f) -> @reduce f, b
 Array::last = -> @[@length - 1]
 String::starts_with = String::startsWith
