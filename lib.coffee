@@ -2,7 +2,9 @@ fs = require "fs"
 Array::sum = (fn) ->
     if fn then @reduce ((ac, n) -> ac + ((fn n) or 0)), 0
     else @reduce ((ac, n) -> ac + n), 0
-Array::product = -> @reduce ((ac, n) -> ac * n) 1
+Array::product = (fn) ->
+    if fn then @reduce ((ac, n) -> ac * ((fn n) or 1)), 1
+    else @reduce ((ac, n) -> ac * n) 1
 Array::iter = Array::forEach
 descending = (a, b) -> b - a
 ascending = (a, b) -> a - b
@@ -39,3 +41,7 @@ Number::clamp = (min, max) -> Math.min(Math.max(@, min), max)
 list_of = (n, fn) -> (new Array n).fill(0).map (_, i) -> fn i
 Array::zip = (other) -> @map (el, i) -> [el, other[i]]
 Array::intersect = (other) -> @filter (el) -> other.includes el
+read_lines = (path) -> (read_text path).split newline
+read_matrix = (path) -> (read_lines path).map (line) -> line.split ""
+is_digit = (c) -> "0" <= c <= "9"
+Array::difference = (other) -> @filter (el) -> not other.includes el
