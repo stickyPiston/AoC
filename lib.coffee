@@ -18,6 +18,7 @@ greater_equal_than = (n) -> (x) -> x >= n
 greater_than = (n) -> (x) -> x > n
 smaller_equal_than = (n) -> (x) -> x <= n
 smaller_than = (n) -> (x) -> x < n
+equals = (a) -> (b) -> a == b
 plus = (a) -> (b) -> a + b
 or_ = (a) -> (b) -> a or b
 Array::cons = (x) -> @push x; x
@@ -40,8 +41,25 @@ abs = Math.abs
 Number::clamp = (min, max) -> Math.min(Math.max(@, min), max)
 list_of = (n, fn) -> (new Array n).fill(0).map (_, i) -> fn i
 Array::zip = (other) -> @map (el, i) -> [el, other[i]]
+Array::zipWith = (other, f) -> @map (el, i) -> f el, other[i]
 Array::intersect = (other) -> @filter (el) -> other.includes el
 read_lines = (path) -> (read_text path).split newline
 read_matrix = (path) -> (read_lines path).map (line) -> line.split ""
 is_digit = (c) -> "0" <= c <= "9"
 Array::difference = (other) -> @filter (el) -> not other.includes el
+Array::unzip = -> [(@map (p) -> p[0]), (@map (p) -> p[1])]
+Array::scanl = (base, f) ->
+  result = [] ; acc = base
+  for elem in @
+    result.push (acc = f acc)
+  result
+Array::scanl1 = (f) ->
+  result = [@[0]] ; acc = @[0]
+  for elem in @[1..]
+    result.push (acc = f acc, elem)
+  result
+Array::disjoint = (pred) ->
+  yays = [] ; nays = []
+  for elem in @
+    if pred elem then yays.push elem else nays.push elem
+  [yays, nays]
