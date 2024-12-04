@@ -27,7 +27,7 @@ Array::min = -> @foldl @[0], (ac, n) -> Math.min ac, n
 print = (xs...) -> console.log ...xs ; xs[0]
 id = (x) -> x
 Array::count_if = (pred) -> (@filter pred).length
-matrix = ({ rows, cols }) -> (new Array rows).fill(0).map -> new Array cols
+matrix = ({ rows, cols }) -> (new Array rows).fill(0).map -> (new Array cols).fill 0
 Array::fold_until = (base, pred, fn) -> (@foldl [base, no], (ac, c, i, l) ->
     if ac[1] then [ac[0], yes] else if pred c, i, l then [(fn ac[0], c, i, l), yes] else [(fn ac[0], c, i, l), no])[0]
 Array::count_until = (pred) -> @fold_until 0, pred, (plus 1)
@@ -63,3 +63,6 @@ Array::disjoint = (pred) ->
   for elem in @
     if pred elem then yays.push elem else nays.push elem
   [yays, nays]
+Array::matrix_size = ->
+  rows: @length, cols: @[0].length
+Array::matrix_at = (x, y) -> (@[y] or [])[x]
