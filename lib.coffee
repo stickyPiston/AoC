@@ -12,6 +12,7 @@ newline = "\n"
 chars = ""
 read_text = (path) -> do (do (fs.readFileSync path).toString).trim
 Array::foldl = (b, f) -> @reduce f, b
+Array::first = -> @[0]
 Array::last = -> @[@length - 1]
 String::starts_with = String::startsWith
 greater_equal_than = (n) -> (x) -> x >= n
@@ -66,3 +67,4 @@ Array::disjoint = (pred) ->
 Array::matrix_size = ->
   rows: @length, cols: @[0].length
 Array::matrix_at = (x, y) -> (@[y] or [])[x]
+Array::imm_push = (x) -> [...@, x]
