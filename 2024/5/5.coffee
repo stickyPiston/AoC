@@ -14,7 +14,7 @@ print "Part 1:", valid.sum (update) -> update[update.length // 2]
 
 print "Part 2:", invalid.sum (update) ->
   valid_update = update.toSorted (a, b) -> switch
-    when rules[a] and rules[a].has b then -1
-    when rules[b] and rules[b].has a then 1
+    when rules[a]?.has b then -1
+    when rules[b]?.has a then 1
     else 0
   valid_update[valid_update.length // 2]
