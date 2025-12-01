@@ -68,3 +68,6 @@ Array::matrix_size = ->
   rows: @length, cols: @[0].length
 Array::matrix_at = (x, y) -> (@[y] or [])[x]
 Array::imm_push = (x) -> [...@, x]
+mod = (a, b) -> (a % b + b) % b
+div_mod = (a, b) -> [(Math.floor a / b), mod a, b]
+sign = (n) -> if n < 0 then -1 else 1
