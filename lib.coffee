@@ -71,3 +71,8 @@ Array::imm_push = (x) -> [...@, x]
 mod = (a, b) -> (a % b + b) % b
 div_mod = (a, b) -> [(Math.floor a / b), mod a, b]
 sign = (n) -> if n < 0 then -1 else 1
+even = (n) -> n % 2 is 0
+odd = (n) -> not even n
+floor = Math.floor ; ceil = Math.ceil ; log10 = Math.log10
+digits = (n) -> 1 + floor log10 n
+divisable = (n, d) -> n % d is 0
